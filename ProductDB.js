@@ -28,6 +28,6 @@ const Product = sequelize.define("Product",{
 })
 
 sequelize.authenticate()
-// sequelize.sync()
+sequelize.sync()
 
 module.exports = Product
