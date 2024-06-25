@@ -15,6 +15,6 @@ const Category = sequelize.define("Category",{
 })
 
 sequelize.authenticate()
-sequelize.sync()
+// sequelize.sync()
 
 module.exports = Category
