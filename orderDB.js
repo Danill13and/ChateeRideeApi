@@ -37,6 +37,6 @@ const Order = sequelize.define("Order",{
 })
 
 sequelize.authenticate()
-sequelize.sync()
+// sequelize.sync()
 
 module.exports = Order
