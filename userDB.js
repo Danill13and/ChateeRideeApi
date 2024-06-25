@@ -39,6 +39,6 @@ const sequelize = new Sequelize(DataBaseUrl, {
   })
 
   sequelize.authenticate()
-  // sequelize.sync()
+  sequelize.sync()
 
   module.exports = User
