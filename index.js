@@ -1,4 +1,5 @@
 const express = require('express')
+require('dotenv').config()
 const Product = require("./ProductDB")
 const Category = require("./categoryDB")
 const User = require("./userDB")
@@ -8,9 +9,9 @@ const { v4: uuidv4 } = require('uuid');
 const cors = require('cors')
 const { where } = require('sequelize')
 const { Telegraf } =require("telegraf")
-require("dotenv").config()
 
-const { MonoBankToken, TelegramToken } = process.env 
+const MonoBankToken = process.env.MonoBankToken
+const TelegramToken = process.env.TelegramToken
 const app = express()
 app.use(express.urlencoded({ extended: true })); 
 app.use(express.json())
@@ -56,14 +57,12 @@ app.post('/userLogin', async (req, res) => {
 
 app.get('/getProduct/:id', async (req, res) => {
     const id  = req.params.id;
-    console.log(id)
     const product = await Product.findAll({where: {category: id}});
     res.send(product);
 });
 
 app.get('/mainProduct/:id', async(req, res)=>{
     const id = req.params.id; 
-    console.log(id);
     const prod = await Product.findOne({where: {id: id}})
     res.send(prod)
 })
@@ -97,7 +96,6 @@ app.post('/createUsers', async(req, res)=>{
     else if (req.body.phoneNumber.length < 10){
         return res.json({error: "Phone number is invalid"})
     }
-    console.log(req.body.phoneNumber)
     const newUser = await User.create({name : `${req.body.name}`, surName: `${req.body.lastName}`, password : `${req.body.password}`, apikey : apikey, phoneNumber : `${req.body.phoneNumber}`})
     res.send(newUser)
 })
@@ -193,7 +191,6 @@ app.post("/productPlus", async (req, res) => {
     if (apiKey && apiKey !== "undefined") {
         const UsersID = await User.findOne({apikey: apiKey})
         const productPlus = await Basket.findOne({where: {id: product}})
-        console.log(productPlus)
         if(productPlus.count <= 9){
             console.log(productPlus.count)
             productPlus.update({count: productPlus.count + 1})
@@ -205,7 +202,6 @@ app.post("/productPlus", async (req, res) => {
         const userToken = req.headers["user_token"]
         const productPlus = await Basket.findOne({where: {user_token: userToken }})
         if(productPlus.count <= 9){
-            console.log(productPlus.count)
             productPlus.update({count: productPlus.count + 1})
             res.send(productPlus)
         }else{
@@ -221,7 +217,6 @@ app.post("/productMinus", async (req, res) => {
         const UsersID = await User.findOne({apikey: apiKey})
         const productMinus = await Basket.findOne({where: {id: product}})
         if(productMinus.count > 1){
-            console.log(productMinus.count)
             productMinus.update({count: productMinus.count - 1})
             res.send(productMinus)
         }else{
@@ -231,7 +226,6 @@ app.post("/productMinus", async (req, res) => {
         const userToken = req.headers["user_token"]
         const productMinus = await Basket.findOne({where: {user_token: userToken }})
         if(productMinus.count > 1){
-            console.log(productMinus.count)
             productMinus.update({count: productMinus.count - 1})
             res.send(productMinus)
         }else{
@@ -353,7 +347,6 @@ app.post('/order', async (req, res) => {
             res.send(error)
         })
         .then(async (data) => {
-            console.log(users)
             const order = await Order.create({
                 inVoiceId: data.invoiceId,
                 success: false,
@@ -460,7 +453,6 @@ app.get('/getOrders', async (req, res) => {
     try {
         // Получение значения заголовка, проверка наличия и логирование
         const invoiceId = req.headers["invoice-id"];
-        console.log(`Received invoiceId: ${invoiceId}`);
 
         // Проверка наличия invoiceId в заголовках
         if (!invoiceId) {
