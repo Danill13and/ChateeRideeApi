@@ -43,6 +43,6 @@ Product.belongsToMany(User, { through: Basket, onDelete: "CASCADE"});
 // Product.belongsTo(Basket, {ondelete: "CASCADE", through: Basket})
 
 sequelize.authenticate()
-// sequelize.sync()
+sequelize.sync()
 
 module.exports = Basket
