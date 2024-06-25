@@ -37,12 +37,7 @@ const Basket = sequelize.define("Basket",{
 User.belongsToMany(Product, { through: Basket, onDelete: "CASCADE"});
 Product.belongsToMany(User, { through: Basket, onDelete: "CASCADE"});
 
-// Basket.hasMany(User, {ondelete: "CASCADE"})
-// User.belongsTo(Basket, {ondelete: "CASCADE", through: Basket})
-// Basket.hasMany(Product, {ondelete: "CASCADE"})
-// Product.belongsTo(Basket, {ondelete: "CASCADE", through: Basket})
-
 sequelize.authenticate()
-sequelize.sync()
+// sequelize.sync()
 
 module.exports = Basket
