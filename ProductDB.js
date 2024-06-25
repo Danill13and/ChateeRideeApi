@@ -1,9 +1,10 @@
 const { DataTypes, Sequelize } = require('sequelize')
+require('dotenv').config()
 
-const sequelize = new Sequelize('diplomdatabase', 'postgres', 'postgres', {
-  host: 'localhost',
-  dialect: 'postgres',
-})
+const DataBaseUrl = process.env.DataBaseUrl
+const sequelize = new Sequelize(DataBaseUrl, {
+    dialect: 'postgres',
+  })
 
 const Product = sequelize.define("Product",{
     name:{
