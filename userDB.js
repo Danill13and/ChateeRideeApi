@@ -35,10 +35,6 @@ const sequelize = new Sequelize(DataBaseUrl, {
     phoneNumber:{
       type:DataTypes.STRING,
       allowNull: true
-    },
-    image:{
-      type:DataTypes.STRING,
-      allowNull: true
     }
   })
 
