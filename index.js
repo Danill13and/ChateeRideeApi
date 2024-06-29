@@ -254,7 +254,7 @@ app.get("/getProductFromBasket", async (req, res) => {
         let basket = [];
         let users = [];
 
-        if (apiKey && apiKey !== "undefined") {
+        if(apiKey && apiKey !== undefined && apiKey !== "undefined" && apiKey !== null && apiKey !== "null") {
             // Проверка наличия и валидности apiKey
             const user = await User.findOne({ where: { apikey: apiKey } });
             if (!user) {
