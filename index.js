@@ -303,7 +303,7 @@ app.post('/order', async (req, res) => {
         } else {
             const userToken = req.headers["user_token"];
 
-            basketItems = await Basket.findAll({ where: { user_token: userToken } });
+            basketItems = await Basket.findAll({ where: { user_token: `${userToken}` } });
         }
 
         if (!basketItems || basketItems.length === 0) {
