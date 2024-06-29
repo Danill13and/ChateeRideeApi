@@ -140,7 +140,7 @@ app.get("/basket", async (req, res) => {
         let products = [];
         let basket = [];
 
-        if (apiKey && apiKey !== "undefined") {
+        if(apiKey && apiKey !== undefined && apiKey !== "undefined" && apiKey !== null && apiKey !== "null") {
             // Проверка наличия и валидности apiKey
             const user = await User.findOne({ where: { apikey: apiKey } });
 
@@ -194,7 +194,7 @@ app.post("/productPlus", async (req, res) => {
     const product = req.body.id
     console.log(product)
     const apiKey = req.headers["api-key"]
-    if (apiKey && apiKey !== "undefined") {
+    if(apiKey && apiKey !== undefined && apiKey !== "undefined" && apiKey !== null && apiKey !== "null") {
         const UsersID = await User.findOne({apikey: apiKey})
         const productPlus = await Basket.findOne({where: {id: product}})
         if(productPlus.count <= 9){
@@ -219,7 +219,7 @@ app.post("/productPlus", async (req, res) => {
 app.post("/productMinus", async (req, res) => {
     const product = req.body.id
     const apiKey = req.headers["api-key"]
-    if (apiKey && apiKey !== "undefined") {
+    if(apiKey && apiKey !== undefined && apiKey !== "undefined" && apiKey !== null && apiKey !== "null") {
         const UsersID = await User.findOne({apikey: apiKey})
         const productMinus = await Basket.findOne({where: {id: product}})
         if(productMinus.count > 1){
