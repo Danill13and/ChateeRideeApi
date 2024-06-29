@@ -109,7 +109,7 @@ app.post('/createUsers', async(req, res)=>{
 app.post("/addToBasket/:id", async (req, res) => {
     const apiKey = req.headers["api-key"]
     const product = req.params.id
-    if(apiKey && apiKey !== undefined && apiKey !== "undefined" && apiKey !== null){
+    if(apiKey && apiKey !== undefined && apiKey !== "undefined" && apiKey !== null && apiKey !== "null"){
         const UsersID = await User.findOne({where: {apikey: apiKey}})
         const allBasket = await Basket.findOne({where: {userID: `${UsersID.id}`, productID: `${product}`}})
         if(!allBasket){
