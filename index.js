@@ -141,14 +141,12 @@ app.get("/basket", async (req, res) => {
         let basket = [];
 
         if(apiKey && apiKey !== undefined && apiKey !== "undefined" && apiKey !== null && apiKey !== "null") {
-            // Проверка наличия и валидности apiKey
             const user = await User.findOne({ where: { apikey: apiKey } });
 
             if (!user) {
                 return res.status(404).json({ error: "Пользователь не найден" });
             }
 
-            // Поиск товаров в корзине по userID
             basketItems = await Basket.findAll({ where: { userID: user.id } });
 
         } else {
@@ -158,16 +156,13 @@ app.get("/basket", async (req, res) => {
                 return res.status(400).json({ error: "Отсутствует пользовательский токен" });
             }
 
-            // Поиск товаров в корзине по user_token
             basketItems = await Basket.findAll({ where: { user_token: userToken } });
         }
 
-        // Проверка наличия товаров в корзине
         if (!basketItems || basketItems.length === 0) {
             return res.status(404).json({ error: "Корзина пользователя пуста" });
         }
 
-        // Получение всех товаров в корзине
         for (const item of basketItems) {
             
             const product = await Product.findOne({ where: { id: item.productID } });
@@ -255,27 +250,22 @@ app.get("/getProductFromBasket", async (req, res) => {
         let users = [];
 
         if(apiKey && apiKey !== undefined && apiKey !== "undefined" && apiKey !== null && apiKey !== "null") {
-            // Проверка наличия и валидности apiKey
             const user = await User.findOne({ where: { apikey: apiKey } });
             if (!user) {
                 return res.status(404).json({ error: "Пользователь не найден" });
             }
             users.push(user)
-            // Поиск товаров в корзине по userID
             basketItems = await Basket.findAll({ where: { userID: `${user.id}` } });
         } else {
             const userToken = req.headers["user_token"];
 
-            // Поиск товаров в корзине по user_token
             basketItems = await Basket.findAll({ where: { user_token: userToken } });
         }
 
-        // Проверка наличия товаров в корзине
         if (!basketItems || basketItems.length === 0) {
             return res.status(404).json({ error: "Корзина пользователя пуста" });
         }
 
-        // Получение всех товаров в корзине
         for (const item of basketItems) {
             
             const product = await Product.findOne({ where: { id: item.productID } });
@@ -302,29 +292,24 @@ app.post('/order', async (req, res) => {
     let users = [];
     
     try {
-        if (apiKey && apiKey !== "undefined") {
-            // Проверка наличия и валидности apiKey
+        if(apiKey && apiKey !== undefined && apiKey !== "undefined" && apiKey !== null && apiKey !== "null") {
             const user = await User.findOne({ where: { apikey: apiKey } });
             if (!user) {
                 return res.status(404).json({ error: "Пользователь не найден" });
             }
             console.log(user.id)
             users.push(user.id)
-            // Поиск товаров в корзине по userID
             basketItems = await Basket.findAll({ where: { userID: `${user.id}` } });
         } else {
             const userToken = req.headers["user_token"];
 
-            // Поиск товаров в корзине по user_token
             basketItems = await Basket.findAll({ where: { user_token: userToken } });
         }
 
-        // Проверка наличия товаров в корзине
         if (!basketItems || basketItems.length === 0) {
             return res.status(404).json({ error: "Корзина пользователя пуста" });
         }
 
-        // Получение всех товаров в корзине
         for (const item of basketItems) {
             
             const product = await Product.findOne({ where: { id: item.productID } });
@@ -346,7 +331,6 @@ app.post('/order', async (req, res) => {
             })
         })
         .then((response) => {
-            // console.log(response);
             return response.json();
         })
         .catch(error =>{
@@ -370,8 +354,6 @@ app.post('/order', async (req, res) => {
 });
 
 app.get('/checkOrder', async (req, res) => {
-    // const orderData = req.headers['order-data'];
-    // console.log(orderData);
     let products = [];
     let baskets = [];
     let basketItems
@@ -457,27 +439,22 @@ app.get('/checkOrder', async (req, res) => {
 
 app.get('/getOrders', async (req, res) => {
     try {
-        // Получение значения заголовка, проверка наличия и логирование
         const invoiceId = req.headers["invoice-id"];
 
-        // Проверка наличия invoiceId в заголовках
         if (!invoiceId) {
             return res.status(400).send({ error: "Invoice ID is required" });
         }
 
-        // Поиск заказа по invoiceId
         const orders = await Order.findOne({
             where: {
                 inVoiceId: invoiceId
             }
         });
 
-        // Проверка, был ли найден заказ
         if (!orders) {
             return res.status(404).send({ error: "No orders found for the provided invoice ID" });
         }
 
-        // Отправка найденного заказа клиенту
         res.status(200).send(orders);
     } catch (error) {
         console.error(`Error fetching orders: ${error.message}`);
