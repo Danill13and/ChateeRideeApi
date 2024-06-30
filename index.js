@@ -182,7 +182,7 @@ app.get("/basket", async (req, res) => {
 app.post("/deleteBasket", async (req, res) => {
     const product = req.body.id
     const deleteProduct = await Basket.destroy({where: {id: product}})
-    res.send("delete product")
+    res.status(200).json("Внутренняя ошибка сервера")
 })
 
 app.post("/productPlus", async (req, res) => {
