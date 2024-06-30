@@ -192,7 +192,7 @@ app.post("/productPlus", async (req, res) => {
     if(apiKey && apiKey !== undefined && apiKey !== "undefined" && apiKey !== null && apiKey !== "null") {
         const UsersID = await User.findOne({apikey: apiKey})
         const productPlus = await Basket.findOne({where: {id: product}})
-        if(productPlus.count <= 9){
+        if(productPlus.count <= 24){
             console.log(productPlus.count)
             productPlus.update({count: productPlus.count + 1})
             res.send(productPlus)
@@ -202,7 +202,7 @@ app.post("/productPlus", async (req, res) => {
     }else{
         const userToken = req.headers["user_token"]
         const productPlus = await Basket.findOne({where: {user_token: userToken }})
-        if(productPlus.count <= 9){
+        if(productPlus.count <= 24){
             productPlus.update({count: productPlus.count + 1})
             res.send(productPlus)
         }else{
