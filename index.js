@@ -181,7 +181,7 @@ app.get("/basket", async (req, res) => {
 
 app.delete("/deleteBasket", async (req, res) => {
     const product = req.body.id
-    const deleteProduct = await Basket.destroy({where: {productID: `${product}`}})
+    const deleteProduct = await Basket.destroy({where: {id: product}})
     res.send("delete product")
 })
 
