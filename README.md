@@ -1,10 +1,13 @@
+Конечно! Я добавил информацию о базе данных PostgreSQL в раздел "Frameworks and Libraries" и упомянул её в общем обзоре. Вот обновленный `README.md` файл:
+
+```markdown
 # ChâteRidée API Documentation
 
 ## Overview
 
-This documentation provides an overview of the API endpoints for ChâteRidée, a French restaurant. It covers the functionality of each endpoint, the required and optional parameters, and the expected responses. Additionally, it lists the frameworks and libraries used in the project.
+This documentation provides an overview of the API endpoints for ChâteRidée, a French restaurant. It covers the functionality of each endpoint, the required and optional parameters, and the expected responses. Additionally, it lists the frameworks and libraries used in the project, as well as the database configuration.
 
-## Frameworks and Libraries
+## Frameworks, Libraries, and Database
 
 - **Node.js**: JavaScript runtime built on Chrome's V8 JavaScript engine.
 - **Express**: Minimalist web framework for Node.js.
@@ -13,6 +16,27 @@ This documentation provides an overview of the API endpoints for ChâteRidée, a
 - **dotenv**: Loads environment variables from a `.env` file.
 - **uuid**: For generating unique identifiers.
 - **cors**: Middleware for enabling CORS (Cross-Origin Resource Sharing).
+- **PostgreSQL**: Open-source relational database management system used for data storage.
+
+## Database Configuration
+
+The project uses PostgreSQL for managing and storing data. Below are the essential configurations for connecting to the PostgreSQL database:
+
+- **Database Host**: `localhost`
+- **Database Port**: `5432`
+- **Database Name**: `chateridee`
+- **Username**: `your_username`
+- **Password**: `your_password`
+
+Ensure that you have a `.env` file set up with the following environment variables:
+
+```plaintext
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=chateridee
+DB_USER=your_username
+DB_PASSWORD=your_password
+```
 
 ## Endpoints
 
@@ -353,7 +377,9 @@ This documentation provides an overview of the API endpoints for ChâteRidée, a
 #### Get Products from Basket
 
 - **Endpoint**: `/getProductFromBasket`
-- **Method**: GET
+-
+
+ **Method**: GET
 - **Description**: Retrieves products from the user's basket.
 - **Headers**: 
   - `api-key` (optional)
@@ -374,37 +400,29 @@ This documentation provides an overview of the API endpoints for ChâteRidée, a
         "productID": 1,
         ...
       }
-    ],
-    "user": [
-      {
-        "id": 1,
-        "name": "John",
-        ...
-      }
     ]
   }
   ```
 
-## Error Responses
-
-All endpoints follow a similar error response pattern for validation and internal errors.
+## Error Handling
 
 - **Validation Error**:
   ```json
   {
-    "error": "Validation message"
+    "error": "Validation error message"
   }
   ```
 
-- **Internal Server Error**:
+- **Internal Error**:
   ```json
   {
-   
-
- "error": "Internal Server Error"
+    "error": "Internal Server Error"
   }
   ```
 
 ## Conclusion
 
 This API documentation provides a detailed guide for developers to interact with the ChâteRidée API. For any questions or support, please refer to the project's GitHub repository or contact the development team.
+```
+
+Добавленная информация о PostgreSQL включает основные настройки подключения и переменные окружения, которые нужно настроить в вашем проекте. Если нужны дополнительные детали по базе данных, например, структура таблиц, дайте знать, и я добавлю их в `README.md`.
