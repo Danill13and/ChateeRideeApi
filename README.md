@@ -1,25 +1,24 @@
-
 ```markdown
-# ChâteRidée API Documentation
+# Документація API ChâteRidée
 
-## Overview
+## Огляд
 
-This documentation provides an overview of the API endpoints for ChâteRidée, a French restaurant. It covers the functionality of each endpoint, the required and optional parameters, and the expected responses. Additionally, it lists the frameworks and libraries used in the project, as well as the database configuration.
+Ця документація надає огляд ендпоінтів API для ChâteRidée, французького ресторану. Вона охоплює функціонал кожного ендпоінту, необхідні та додаткові параметри, та очікувані відповіді. Крім того, перелічені фреймворки, бібліотеки, що використовуються в проекті, а також конфігурація бази даних.
 
-## Frameworks, Libraries, and Database
+## Фреймворки, Бібліотеки та База даних
 
-- **Node.js**: JavaScript runtime built on Chrome's V8 JavaScript engine.
-- **Express**: Minimalist web framework for Node.js.
-- **Sequelize**: ORM for SQL databases.
-- **Telegraf**: Telegram bot framework.
-- **dotenv**: Loads environment variables from a `.env` file.
-- **uuid**: For generating unique identifiers.
-- **cors**: Middleware for enabling CORS (Cross-Origin Resource Sharing).
-- **PostgreSQL**: Open-source relational database management system used for data storage.
+- **Node.js**: Інтерпретатор JavaScript, побудований на движку JavaScript V8 Chrome.
+- **Express**: Мінімалістичний веб-фреймворк для Node.js.
+- **Sequelize**: ORM для SQL баз даних.
+- **Telegraf**: Фреймворк для створення ботів для Telegram на Node.js.
+- **dotenv**: Завантажує змінні середовища з файлу `.env`.
+- **uuid**: Для генерації унікальних ідентифікаторів.
+- **cors**: Проміжний програмний засіб для увімкнення CORS (Cross-Origin Resource Sharing).
+- **PostgreSQL**: Відкрита реляційна система управління базами даних, яка використовується для зберігання даних.
 
-## Database Configuration
+## Конфігурація бази даних
 
-The project uses PostgreSQL for managing and storing data. Below are the essential configurations for connecting to the PostgreSQL database:
+Проект використовує PostgreSQL для управління та зберігання даних. Нижче наведені основні конфігурації для підключення до бази даних PostgreSQL:
 
 - **Database Host**: `localhost`
 - **Database Port**: `5432`
@@ -27,7 +26,7 @@ The project uses PostgreSQL for managing and storing data. Below are the essenti
 - **Username**: `your_username`
 - **Password**: `your_password`
 
-Ensure that you have a `.env` file set up with the following environment variables:
+Переконайтеся, що у вас є файл `.env`, де вказані наступні змінні середовища:
 
 ```plaintext
 DB_HOST=localhost
@@ -37,129 +36,129 @@ DB_USER=your_username
 DB_PASSWORD=your_password
 ```
 
-## Endpoints
+## Ендпоінти
 
-### Category Endpoints
+### Ендпоінти категорій
 
-#### Get All Categories
+#### Отримати всі категорії
 
-- **Endpoint**: `/AllCategory`
-- **Method**: GET
-- **Description**: Fetches all categories from the database.
-- **Request Body**: None
-- **Response**:
+- **Ендпоінт**: `/AllCategory`
+- **Метод**: GET
+- **Опис**: Отримує всі категорії з бази даних.
+- **Тіло запиту**: Відсутнє
+- **Відповідь**:
   ```json
   [
     {
       "id": 1,
-      "name": "Category 1"
+      "name": "Категорія 1"
     },
     ...
   ]
   ```
 
-#### Create a Category
+#### Створити категорію
 
-- **Endpoint**: `/createCategory`
-- **Method**: POST
-- **Description**: Creates a new category.
-- **Request Body**:
+- **Ендпоінт**: `/createCategory`
+- **Метод**: POST
+- **Опис**: Створює нову категорію.
+- **Тіло запиту**:
   ```json
   {
-    "name": "Category Name"
+    "name": "Назва категорії"
   }
   ```
-- **Response**:
+- **Відповідь**:
   ```json
   {
     "id": 1,
-    "name": "Category Name"
+    "name": "Назва категорії"
   }
   ```
-- **Error Response**:
+- **Відповідь на помилку**:
   ```json
   {
     "error": "name is required"
   }
   ```
 
-### User Endpoints
+### Ендпоінти користувачів
 
-#### User Login
+#### Вхід користувача
 
-- **Endpoint**: `/userLogin`
-- **Method**: POST
-- **Description**: Authenticates a user with their name, surname, and password.
-- **Request Body**:
+- **Ендпоінт**: `/userLogin`
+- **Метод**: POST
+- **Опис**: Автентифікує користувача за його ім'ям, прізвищем і паролем.
+- **Тіло запиту**:
   ```json
   {
-    "name": "John",
-    "surName": "Doe",
-    "password": "password123"
+    "name": "Ім'я",
+    "surName": "Прізвище",
+    "password": "пароль123"
   }
   ```
-- **Response**:
+- **Відповідь**:
   ```json
   {
     "id": 1,
-    "name": "John",
-    "surName": "Doe",
+    "name": "Ім'я",
+    "surName": "Прізвище",
     ...
   }
   ```
-- **Error Response**:
+- **Відповідь на помилку**:
   ```json
   {
     "error": "Name, surname, and password are required"
   }
   ```
 
-#### Create a User
+#### Створити користувача
 
-- **Endpoint**: `/createUsers`
-- **Method**: POST
-- **Description**: Creates a new user.
-- **Request Body**:
+- **Ендпоінт**: `/createUsers`
+- **Метод**: POST
+- **Опис**: Створює нового користувача.
+- **Тіло запиту**:
   ```json
   {
-    "name": "John",
-    "lastName": "Doe",
-    "password": "password123",
-    "rePassword": "password123",
+    "name": "Ім'я",
+    "lastName": "Прізвище",
+    "password": "пароль123",
+    "rePassword": "пароль123",
     "phoneNumber": "1234567890"
   }
   ```
-- **Response**:
+- **Відповідь**:
   ```json
   {
     "id": 1,
-    "name": "John",
-    "surName": "Doe",
-    "apikey": "uuidv4-generated-key",
+    "name": "Ім'я",
+    "surName": "Прізвище",
+    "apikey": "uuidv4-згенерований-ключ",
     ...
   }
   ```
-- **Error Responses**:
+- **Відповіді на помилку**:
   ```json
   {
     "error": "Name is required"
   }
   ```
 
-### Product Endpoints
+### Ендпоінти продуктів
 
-#### Get Products by Category
+#### Отримати продукти за категорією
 
-- **Endpoint**: `/getProduct/:id`
-- **Method**: GET
-- **Description**: Retrieves products based on the provided category ID.
-- **URL Parameter**: `id` (Category ID)
-- **Response**:
+- **Ендпоінт**: `/getProduct/:id`
+- **Метод**: GET
+- **Опис**: Отримує продукти на основі наданого ідентифікатора категорії.
+- **URL-параметр**: `id` (Ідентифікатор категорії)
+- **Відповідь**:
   ```json
   [
     {
       "id": 1,
-      "name": "Product 1",
+      "name": "Продукт 1",
       "category": 1,
       ...
     },
@@ -167,33 +166,33 @@ DB_PASSWORD=your_password
   ]
   ```
 
-#### Get Main Product
+#### Отримати основний продукт
 
-- **Endpoint**: `/mainProduct/:id`
-- **Method**: GET
-- **Description**: Fetches a single product by its ID.
-- **URL Parameter**: `id` (Product ID)
-- **Response**:
+- **Ендпоінт**: `/mainProduct/:id`
+- **Метод**: GET
+- **Опис**: Отримує один продукт за його ідентифікатором.
+- **URL-параметр**: `id` (Ідентифікатор продукту)
+- **Відповідь**:
   ```json
   {
     "id": 1,
-    "name": "Main Product",
+    "name": "Основний продукт",
     ...
   }
   ```
 
-### Basket Endpoints
+### Ендпоінти кошика
 
-#### Add to Basket
+#### Додати до кошика
 
-- **Endpoint**: `/addToBasket/:id`
-- **Method**: POST
-- **Description**: Adds a product to the user's basket.
-- **URL Parameter**: `id` (Product ID)
-- **Headers**: 
-  - `api-key` (optional)
-  - `user_token` (optional)
-- **Response**:
+- **Ендпоінт**: `/addToBasket/:id`
+- **Метод**: POST
+- **Опис**: Додає продукт до кошика користувача.
+- **URL-параметр**: `id` (Ідентифікатор продукту)
+- **Заголовки**: 
+  - `api-key` (необов'язково)
+  - `user_token` (необов'язково)
+- **Відповідь**:
   ```json
   {
     "id": 1,
@@ -203,21 +202,23 @@ DB_PASSWORD=your_password
   }
   ```
 
-#### Get Basket Items
+#### Отримати елементи кошика
 
-- **Endpoint**: `/basket`
-- **Method**: GET
-- **Description**: Retrieves items in the user's basket.
-- **Headers**: 
-  - `api-key` (optional)
-  - `user_token` (optional)
-- **Response**:
+- **Ендпоінт**: `/basket`
+- **Метод**: GET
+- **Опис**: Отрим
+
+ує елементи у кошику користувача.
+- **Заголовки**: 
+  - `api-key` (необов'язково)
+  - `user_token` (необов'язково)
+- **Відповідь**:
   ```json
   {
     "prod": [
       {
         "id": 1,
-        "name": "Product 1",
+        "name": "Продукт 1",
         ...
       }
     ],
@@ -231,39 +232,39 @@ DB_PASSWORD=your_password
   }
   ```
 
-#### Delete Basket Item
+#### Видалити елемент кошика
 
-- **Endpoint**: `/deleteBasket`
-- **Method**: POST
-- **Description**: Removes a product from the basket.
-- **Request Body**:
+- **Ендпоінт**: `/deleteBasket`
+- **Метод**: POST
+- **Опис**: Видаляє продукт з кошика.
+- **Тіло запиту**:
   ```json
   {
     "id": 1
   }
   ```
-- **Response**:
+- **Відповідь**:
   ```json
   {
     "message": "delete product"
   }
   ```
 
-#### Increase Product Quantity
+#### Збільшити кількість продукту
 
-- **Endpoint**: `/productPlus`
-- **Method**: POST
-- **Description**: Increases the quantity of a product in the basket.
-- **Request Body**:
+- **Ендпоінт**: `/productPlus`
+- **Метод**: POST
+- **Опис**: Збільшує кількість продукту у кошику.
+- **Тіло запиту**:
   ```json
   {
     "id": 1
   }
   ```
-- **Headers**: 
-  - `api-key` (optional)
-  - `user_token` (optional)
-- **Response**:
+- **Заголовки**: 
+  - `api-key` (необов'язково)
+  - `user_token` (необов'язково)
+- **Відповідь**:
   ```json
   {
     "id": 1,
@@ -272,21 +273,21 @@ DB_PASSWORD=your_password
   }
   ```
 
-#### Decrease Product Quantity
+#### Зменшити кількість продукту
 
-- **Endpoint**: `/productMinus`
-- **Method**: POST
-- **Description**: Decreases the quantity of a product in the basket.
-- **Request Body**:
+- **Ендпоінт**: `/productMinus`
+- **Метод**: POST
+- **Опис**: Зменшує кількість продукту у кошику.
+- **Тіло запиту**:
   ```json
   {
     "id": 1
   }
   ```
-- **Headers**: 
-  - `api-key` (optional)
-  - `user_token` (optional)
-- **Response**:
+- **Заголовки**: 
+  - `api-key` (необов'язково)
+  - `user_token` (необов'язково)
+- **Відповідь**:
   ```json
   {
     "id": 1,
@@ -295,43 +296,43 @@ DB_PASSWORD=your_password
   }
   ```
 
-### Order Endpoints
+### Ендпоінти замовлень
 
-#### Place an Order
+#### Розмістити замовлення
 
-- **Endpoint**: `/order`
-- **Method**: POST
-- **Description**: Creates an order for the items in the user's basket.
-- **Request Body**:
+- **Ендпоінт**: `/order`
+- **Метод**: POST
+- **Опис**: Створює замовлення для товарів у кошику користувача.
+- **Тіло запиту**:
   ```json
   {
     "totalPrice": 100,
     "orderData": {
-      "adress": "123 Street",
+      "adress": "123 Вулиця",
       ...
     }
   }
   ```
-- **Headers**: 
-  - `api-key` (optional)
-  - `user_token` (optional)
-- **Response**:
+- **Заголовки**: 
+  - `api-key` (необов'язково)
+  - `user_token` (необов'язково)
+- **Відповідь**:
   ```json
   {
-    "invoiceId": "uuidv4-generated-key",
+    "invoiceId": "uuidv4-згенерований-ключ",
     ...
   }
   ```
 
-#### Check Order Status
+#### Перевірити статус замовлення
 
-- **Endpoint**: `/checkOrder`
-- **Method**: GET
-- **Description**: Checks the status of pending orders.
-- **Headers**: 
-  - `api-key` (optional)
-  - `user_token` (optional)
-- **Response**:
+- **Ендпоінт**: `/checkOrder`
+- **Метод**: GET
+- **Опис**: Перевіряє статус очікуючих замовлень.
+- **Заголовки**: 
+  - `api-key` (необов'язково)
+  - `user_token` (необов'язково)
+- **Відповідь**:
   ```json
   {
     "status": "success",
@@ -339,57 +340,55 @@ DB_PASSWORD=your_password
   }
   ```
 
-#### Get Orders by Invoice ID
+#### Отримати замовлення за ідентифікатором накладної
 
-- **Endpoint**: `/getOrders`
-- **Method**: GET
-- **Description**: Retrieves an order based on the provided invoice ID.
-- **Headers**: 
-  - `invoice-id` (required)
-- **Response**:
+- **Ендпоінт**: `/getOrders`
+- **Метод**: GET
+- **Опис**: Отримує замовлення на основі наданого ідентифікатора накладної.
+- **Заголовки**: 
+  - `invoice-id` (обов'язково)
+- **Відповідь**:
   ```json
   {
     "id": 1,
-    "inVoiceId": "uuidv4-generated-key",
+    "inVoiceId": "uuidv4-згенерований-ключ",
     ...
   }
   ```
 
-### User Endpoints
+### Ендпоінти користувачів
 
-#### Get User by API Key
+#### Отримати користувача за API ключем
 
-- **Endpoint**: `/getUser`
-- **Method**: GET
-- **Description**: Retrieves user details based on the provided API key.
-- **Headers**: 
-  - `api-key` (required)
-- **Response**:
+- **Ендпоінт**: `/getUser`
+- **Метод**: GET
+- **Опис**: Отримує деталі користувача на основі наданого API ключа.
+- **Заголовки**: 
+  - `api-key` (обов'язково)
+- **Відповідь**:
   ```json
   {
     "id": 1,
-    "name": "John",
+    "name": "Іван",
     ...
   }
   ```
 
-#### Get Products from Basket
+#### Отримати продукти з кошика
 
-- **Endpoint**: `/getProductFromBasket`
--
-
- **Method**: GET
-- **Description**: Retrieves products from the user's basket.
-- **Headers**: 
-  - `api-key` (optional)
-  - `user_token` (optional)
-- **Response**:
+- **Ендпоінт**: `/getProductFromBasket`
+- **Метод**: GET
+- **Опис**: Отримує продукти з кошика користувача.
+- **Заголовки**: 
+  - `api-key` (необов'язково)
+  - `user_token` (необов'язково)
+- **Відповідь**:
   ```json
   {
     "prod": [
       {
         "id": 1,
-        "name": "Product 1",
+        "name": "Продукт 1",
         ...
       }
     ],
@@ -403,25 +402,23 @@ DB_PASSWORD=your_password
   }
   ```
 
-## Error Handling
+## Обробка помилок
 
-- **Validation Error**:
+- **Помилка валідації**:
   ```json
   {
-    "error": "Validation error message"
+    "error": "Повідомлення про помилку валідації"
   }
   ```
 
-- **Internal Error**:
+- **Внутрішня помилка**:
   ```json
   {
-    "error": "Internal Server Error"
+    "error": "Внутрішня серверна помилка"
   }
   ```
 
-## Conclusion
+## Висновок
 
-This API documentation provides a detailed guide for developers to interact with the ChâteRidée API. For any questions or support, please refer to the project's GitHub repository or contact the development team.
+Ця документація API надає детальний посібник для розробників з взаємодії з API ChâteRidée. Для будь-яких питань або підтримки, будь ласка, звертайтесь до репозиторію проекту на GitHub або зв'яжіться з командою розробників.
 ```
-
-Добавленная информация о PostgreSQL включает основные настройки подключения и переменные окружения, которые нужно настроить в вашем проекте. Если нужны дополнительные детали по базе данных, например, структура таблиц, дайте знать, и я добавлю их в `README.md`.
