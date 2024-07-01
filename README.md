@@ -1,4 +1,3 @@
-Конечно! Я добавил информацию о базе данных PostgreSQL в раздел "Frameworks and Libraries" и упомянул её в общем обзоре. Вот обновленный `README.md` файл:
 
 ```markdown
 # ChâteRidée API Documentation
